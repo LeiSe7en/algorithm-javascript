@@ -56,6 +56,8 @@ var merge = function(nums1, m, nums2, n) {
 
 这里主要需要考虑出现次数的问题，因为要与最小出现次数保持一致，那么就需要考虑每个元素出现的次数，在哈希表中就要记录每个值出现的次数，并且匹配到之后就-1.
 
+方法1 就是说我上面说的hash表
+
 ```JS
 var intersect = function(nums1, nums2) {
     let map = {}, result = []
@@ -77,6 +79,26 @@ var intersect = function(nums1, nums2) {
 };
 	
 ```
+方法2 是排序加双指针
 
+```JS
+var intersect = function(nums1, nums2) {
+   nums1 = nums1.sort((a,b) => a - b)
+   nums2 = nums2.sort((a,b) => a - b)
+  let p1 = 0, p2 = 0, result = []
+  while (p1 < nums1.length && p2 < nums2.length) {
+      if (nums1[p1] == nums2[p2]) {
+          result.push(nums1[p1])
+          p1++
+          p2++
+      }else if (nums1[p1] < nums2[p2]) {
+          p1++
+      }else {
+          p2++
+      }
+  }
+  return result
+};
+```
 
 
